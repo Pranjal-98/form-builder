@@ -1,0 +1,1 @@
+export { ElememtWrapperHOC } from "./ElementWrapperHOC";

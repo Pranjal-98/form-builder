@@ -1,4 +1,4 @@
 import React from "react";
 export const Divider = () => (
-  <div className="dropdown-divider border border-white"></div>
+  <div className="dropdown-divider border border-dark"></div>
 );

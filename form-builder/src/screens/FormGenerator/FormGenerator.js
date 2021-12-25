@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { FormConfigurationContext } from "../../App";
 import { ElementConfiguration } from "../../components/ElementConfiguration";
 import { ElementWrapperEditMode } from "../../components/ElementWrapperEditMode/ElementWrapperEditMode";
 import { spawnFormElement } from "../../spawner";
+import { ElementWrapperHOC } from "../../components/ElementWrapperHOC/ElementWrapperHOC";
 
 export const FormGenerator = () => {
   const formConfiguration = useContext(FormConfigurationContext);
@@ -12,6 +13,7 @@ export const FormGenerator = () => {
   const [currentData, setCurrentData] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currentOptions, setCurrentOptions] = useState([]);
+  const [preview, setPreview] = useState(false);
 
   function toggleModal(val) {
     if (modal) {
@@ -60,15 +62,17 @@ export const FormGenerator = () => {
                 {...provided.draggableProps}
               >
                 <Col xs={8}>
-                  <ElementWrapperEditMode
+                  <ElementWrapperHOC
+                    preview={preview}
                     item={item}
                     index={index}
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                     provided={provided}
+                    snapshot={snapshot}
                   >
                     {spawnFormElement(item)}
-                  </ElementWrapperEditMode>
+                  </ElementWrapperHOC>
                 </Col>
               </Row>
               {provided.placeholder}
@@ -118,6 +122,15 @@ export const FormGenerator = () => {
           </>
         )}
       </Droppable>
+      <div className="position-absolute top-0 end-0 p-3 text-primary">
+        <Form.Check
+          type="switch"
+          id="custom-switch"
+          label="Preview Form"
+          value={false}
+          onChange={() => setPreview((prev) => !prev)}
+        />
+      </div>
     </DragDropContext>
   );
 };

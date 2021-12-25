@@ -19,6 +19,7 @@ export const ElementGroup = () => {
       {modal && (
         <ElementConfiguration modal={modal} toggleModal={toggleModal} />
       )}
+      <p className="text-white">Basic Elements</p>
       {elements.map((item, index) => {
         return (
           <Button

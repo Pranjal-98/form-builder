@@ -10,9 +10,14 @@ export const ElementWrapperEditMode = ({
   handleDelete,
   handleEdit,
   provided,
+  snapshot,
 }) => {
   return (
-    <Row className="d-flex justify-content-space-between w-100 py-4 px-2 elementWrapper">
+    <Row
+      className={`d-flex justify-content-space-between w-100 py-4 px-2 elementWrapper ${
+        snapshot.isDragging ? "shadow-lg bg-info" : "bg-white"
+      }`}
+    >
       <Col
         xs={1}
         {...provided.dragHandleProps}
