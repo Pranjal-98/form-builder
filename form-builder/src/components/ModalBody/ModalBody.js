@@ -8,32 +8,25 @@ export const ModalBody = ({
   data,
   setCurrentField,
   addToFormConfiguration,
+  options,
+  setOptions,
 }) => {
-  switch (elementType) {
-    case "text-input":
-      return (
-        <Form
-          onSubmit={(e) => {
-            console.log("here");
-            e.preventDefault();
-            addToFormConfiguration();
-          }}
-        >
-          {spawnElemenConfig(elementType, data, setCurrentField)}
-        </Form>
-      );
-    case "form-title":
-      return (
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addToFormConfiguration();
-          }}
-        >
-          {spawnElemenConfig(elementType, data, setCurrentField)}
-        </Form>
-      );
-  }
+  return (
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        addToFormConfiguration();
+      }}
+    >
+      {spawnElemenConfig(
+        elementType,
+        data,
+        setCurrentField,
+        options,
+        setOptions
+      )}
+    </Form>
+  );
 };
 
 ModalBody.propTypes = {};

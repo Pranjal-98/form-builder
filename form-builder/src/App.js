@@ -14,25 +14,7 @@ function FormConfigurationContextProvider({ children }) {
     {
       fieldType: "form-title",
       attributes: {
-        title: "sd",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "fddsa",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "asd",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "ofspfidso",
+        title: "Welcome to the new form",
       },
     },
   ]);
@@ -47,10 +29,14 @@ function FormConfigurationContextProvider({ children }) {
 }
 
 function App() {
+  const [showSidebar, setShowSidebar] = React.useState(true);
+  function toggleSidebar() {
+    setShowSidebar((prev) => !prev);
+  }
   return (
     <FormConfigurationContextProvider>
       <div style={{ display: "flex" }}>
-        <Sidebar />
+        <Sidebar showSidebar={showSidebar} toggleSidebar={toggleSidebar} />
         <div style={{ height: "100vh", overflow: "scroll", width: "100%" }}>
           <Routes>
             <Route path="/" element={<FormGenerator />} />

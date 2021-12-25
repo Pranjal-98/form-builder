@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { Pencil, Trash } from "react-bootstrap-icons";
+import { GripVertical, Pencil, Trash } from "react-bootstrap-icons";
 import "./styles.css";
 
 export const ElementWrapperEditMode = ({
@@ -9,12 +9,19 @@ export const ElementWrapperEditMode = ({
   index,
   handleDelete,
   handleEdit,
+  provided,
 }) => {
   return (
     <Row className="d-flex justify-content-space-between w-100 py-4 px-2 elementWrapper">
-      <Col xs={1}></Col>
+      <Col
+        xs={1}
+        {...provided.dragHandleProps}
+        className="d-flex align-items-center "
+      >
+        <GripVertical color="grey" size={20} />
+      </Col>
       <Col xs={9}>{children}</Col>
-      <Col xs={2}>
+      <Col xs={2} className="d-flex justify-content-around flex-column">
         <div className="d-flex justify-content-center">
           <Button
             variant="secondary"
