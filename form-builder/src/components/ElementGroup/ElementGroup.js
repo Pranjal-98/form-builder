@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { elements } from "../../constants/consts";
+import { templates } from "../../constants/consts";
 import { ElementConfiguration } from "../ElementConfiguration";
+import { NavElementsList } from "../NavElementsList";
+import { NavTemplatesList } from "../NavTemplatesList";
 
 export const ElementGroup = () => {
   const [modal, setModal] = useState(null);
@@ -15,23 +17,15 @@ export const ElementGroup = () => {
     }
   }
   return (
-    <div className="h-100 p-3" style={{ overflow: "scroll" }}>
+    <div className="p-3" style={{ overflow: "scroll", height: "85vh" }}>
       {modal && (
         <ElementConfiguration modal={modal} toggleModal={toggleModal} />
       )}
       <p className="text-white">Basic Elements</p>
-      {elements.map((item, index) => {
-        return (
-          <Button
-            key={index}
-            variant="outline-info"
-            className="w-100 mb-3"
-            onClick={() => toggleModal(item.type)}
-          >
-            {item.buttonTitle}
-          </Button>
-        );
-      })}
+
+      <NavElementsList toggleModal={toggleModal} />
+      <p className="text-white">Templates</p>
+      <NavTemplatesList toggleModal={toggleModal} />
     </div>
   );
 };

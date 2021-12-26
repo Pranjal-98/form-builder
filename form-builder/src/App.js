@@ -17,30 +17,6 @@ function FormConfigurationContextProvider({ children }) {
         title: "Welcome to the new form",
       },
     },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "Welcome to the new form",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "Welcome to the new form",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "Welcome to the new form",
-      },
-    },
-    {
-      fieldType: "form-title",
-      attributes: {
-        title: "Welcome to the new form",
-      },
-    },
   ]);
 
   return (

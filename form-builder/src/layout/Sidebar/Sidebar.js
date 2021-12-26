@@ -17,14 +17,20 @@ export const Sidebar = ({ showSidebar, toggleSidebar }) => {
     >
       <Button
         variant="info"
-        size="lg"
-        style={{ position: "absolute", right: -30, top: "45%" }}
+        size="sm"
+        className="p-2"
+        style={{
+          position: "absolute",
+          right: -20,
+          top: "45%",
+          borderRadius: "50%",
+        }}
         onClick={toggleSidebar}
       >
         {showSidebar ? (
-          <ArrowLeftCircle color="black" />
+          <ArrowLeftCircle color="black" size={25} />
         ) : (
-          <ArrowRightCircle color="black" />
+          <ArrowRightCircle color="black" size={25} />
         )}
       </Button>
       {showSidebar && <LeftNav />}

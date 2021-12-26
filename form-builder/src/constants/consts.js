@@ -7,6 +7,7 @@ export const MODALHEADING = {
   radio: "Radio",
   "check-box": "Checkbox",
   switch: "Switch",
+  "file-upload": "File Upload",
 };
 
 export const elements = [
@@ -18,7 +19,10 @@ export const elements = [
   { type: "check-box", buttonTitle: "Checkbox" },
   { type: "button", buttonTitle: "Button" },
   { type: "switch", buttonTitle: "Switch" },
+  { type: "file-upload", buttonTitle: "File Upload" },
 ];
+
+export const templates = [{ type: "fullname", buttonTitle: "Full Name" }];
 
 export const buttonVariants = [
   "primary",

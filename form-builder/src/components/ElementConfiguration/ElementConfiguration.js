@@ -28,7 +28,10 @@ export const ElementConfiguration = ({
   function setCurrentField(event) {
     const { name, value } = event.target;
     const dataCopy = { ...data };
+
     dataCopy[name] = value;
+
+    console.log(dataCopy, "*** checkc");
     setData(dataCopy);
   }
 

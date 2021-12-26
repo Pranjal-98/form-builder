@@ -64,15 +64,20 @@ export const spawnFormElement = (item) => {
           <Form.Label>{attributes.label}</Form.Label>
           <Form.Control
             name={attributes.id}
-            size="sm" // todo
-            type="text" // todo
+            size="sm"
+            type={attributes["input-type"]}
             placeholder={attributes.placeholder}
-            autoFocus
+            disabled={attributes.disabled === "true"}
           />
         </Form.Group>
       );
     case "form-title":
-      return <h2>{attributes.title}</h2>;
+      return (
+        <>
+          <h2>{attributes.title}</h2>
+          <h6 className="text-muted">{attributes.subheading}</h6>
+        </>
+      );
     case "text-area":
       return (
         <Form.Group>
@@ -83,7 +88,7 @@ export const spawnFormElement = (item) => {
             name={attributes.id}
             size="sm" // todo
             placeholder={attributes.placeholder}
-            autoFocus
+            disabled={attributes.disabled === "true"}
           />
         </Form.Group>
       );
@@ -91,7 +96,7 @@ export const spawnFormElement = (item) => {
       return (
         <Form.Group>
           <Form.Label>{attributes.label}</Form.Label>
-          <Form.Select>
+          <Form.Select disabled={attributes.disabled === "true"}>
             {attributes.options.map((item) => {
               return <option key={item.id}>{item.value}</option>;
             })}
@@ -103,7 +108,11 @@ export const spawnFormElement = (item) => {
       console.log(attributes.variant, "*** hvs");
       return (
         <Form.Group>
-          <Button variant={attributes.variant} size={attributes.size}>
+          <Button
+            disabled={attributes.disabled === "true"}
+            variant={attributes.variant}
+            size={attributes.size}
+          >
             {attributes.text}{" "}
           </Button>
         </Form.Group>
@@ -115,7 +124,12 @@ export const spawnFormElement = (item) => {
 
           {attributes.options.map((item) => {
             return (
-              <Form.Check type={"radio"} id={item.id} label={item.value} />
+              <Form.Check
+                disabled={attributes.disabled === "true"}
+                type={"radio"}
+                id={item.id}
+                label={item.value}
+              />
             );
           })}
         </>
@@ -127,7 +141,12 @@ export const spawnFormElement = (item) => {
 
           {attributes.options.map((item) => {
             return (
-              <Form.Check type={"checkbox"} id={item.id} label={item.value} />
+              <Form.Check
+                disabled={attributes.disabled === "true"}
+                type={"checkbox"}
+                id={item.id}
+                label={item.value}
+              />
             );
           })}
         </>
@@ -139,8 +158,17 @@ export const spawnFormElement = (item) => {
             type="switch"
             id="custom-switch"
             label={attributes.label}
+            disabled={attributes.disabled === "true"}
           />
         </>
+      );
+
+    case "file-upload":
+      return (
+        <Form.Group controlId={attributes.id}>
+          <Form.Label>{attributes.label}</Form.Label>
+          <Form.Control disabled={attributes.disabled === "true"} type="file" />
+        </Form.Group>
       );
   }
 };
@@ -189,22 +217,65 @@ export const spawnElemenConfig = (
               value={data?.["placeholder"] || ""}
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Input type</Form.Label>
+            <Form.Select
+              name="input-type"
+              onChange={(e) => setCurrentField(e)}
+              value={data?.["input-type"] || ""}
+            >
+              {["text", "password", "number", "email"].map((item) => {
+                return <option key={item}>{item}</option>;
+              })}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
         </>
       );
     case "form-title":
       return (
-        <Form.Group className="mb-3">
-          <Form.Label>Form Title</Form.Label>
-          <Form.Control
-            name="title"
-            size="sm"
-            type="text"
-            placeholder="Add form title"
-            onChange={(e) => setCurrentField(e)}
-            value={data?.["title"] || ""}
-            autoFocus={true}
-          />
-        </Form.Group>
+        <>
+          <Form.Group className="mb-3">
+            <Form.Label>Form Title</Form.Label>
+            <Form.Control
+              name="title"
+              size="sm"
+              type="text"
+              placeholder="Add form title"
+              onChange={(e) => setCurrentField(e)}
+              value={data?.["title"] || ""}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Subheading</Form.Label>
+            <Form.Control
+              name="subheading"
+              size="sm"
+              type="text"
+              placeholder="Add subheading"
+              onChange={(e) => setCurrentField(e)}
+              value={data?.["subheading"] || ""}
+            />
+          </Form.Group>
+        </>
       );
 
     case "text-area":
@@ -219,7 +290,6 @@ export const spawnElemenConfig = (
               placeholder="ID of text area"
               onChange={(e) => setCurrentField(e)}
               value={data?.["id"] || ""}
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -244,6 +314,25 @@ export const spawnElemenConfig = (
               value={data?.["placeholder"] || ""}
             />
           </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
         </>
       );
 
@@ -259,7 +348,6 @@ export const spawnElemenConfig = (
               placeholder="ID of drop down"
               onChange={(e) => setCurrentField(e)}
               value={data?.["id"] || ""}
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -271,6 +359,25 @@ export const spawnElemenConfig = (
               placeholder="Label"
               onChange={(e) => setCurrentField(e)}
               value={data?.["label"] || ""}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
             />
           </Form.Group>
           {getDropdownOptions(options, setOptions)}
@@ -289,7 +396,6 @@ export const spawnElemenConfig = (
               placeholder="ID of drop down"
               onChange={(e) => setCurrentField(e)}
               value={data?.["id"] || ""}
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -311,6 +417,25 @@ export const spawnElemenConfig = (
               })}
             </Form.Select>
           </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
         </>
       );
 
@@ -326,7 +451,6 @@ export const spawnElemenConfig = (
               placeholder="ID of radio"
               onChange={(e) => setCurrentField(e)}
               value={data?.["id"] || ""}
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -340,6 +464,26 @@ export const spawnElemenConfig = (
               value={data?.["label"] || ""}
             />
           </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
+
           {getDropdownOptions(options, setOptions)}
         </>
       );
@@ -355,7 +499,6 @@ export const spawnElemenConfig = (
               placeholder="ID of checkbox"
               onChange={(e) => setCurrentField(e)}
               value={data?.["id"] || ""}
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -369,6 +512,26 @@ export const spawnElemenConfig = (
               value={data?.["label"] || ""}
             />
           </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
+
           {getDropdownOptions(options, setOptions)}
         </>
       );
@@ -395,6 +558,71 @@ export const spawnElemenConfig = (
               placeholder="Label"
               onChange={(e) => setCurrentField(e)}
               value={data?.["label"] || ""}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
+            />
+          </Form.Group>
+        </>
+      );
+    case "file-upload":
+      return (
+        <>
+          <Form.Group className="mb-3">
+            <Form.Label>ID of fileupload</Form.Label>
+            <Form.Control
+              name="id"
+              size="sm"
+              type="text"
+              placeholder="ID"
+              onChange={(e) => setCurrentField(e)}
+              value={data?.["id"] || ""}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Label </Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              name="label"
+              placeholder="Label"
+              onChange={(e) => setCurrentField(e)}
+              value={data?.["label"] || ""}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            value={data?.["disabled"]}
+            onChange={(e) => setCurrentField(e)}
+          >
+            <Form.Label>Disabled?</Form.Label>
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"Yes"}
+              value={"true"}
+            />
+            <Form.Check
+              type={"radio"}
+              name="disabled"
+              label={"No"}
+              value={"false"}
             />
           </Form.Group>
         </>
