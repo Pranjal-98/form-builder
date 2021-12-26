@@ -7,7 +7,6 @@ export const LeftNav = () => {
     <div>
       <AppHeading />
       <Divider />
-
       <ElementGroup />
     </div>
   );

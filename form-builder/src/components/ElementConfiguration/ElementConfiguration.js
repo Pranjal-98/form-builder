@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import PropTypes from "prop-types";
 import { FormConfigurationContext } from "../../App";
 import { MODALHEADING } from "../../constants/consts";
 import { ModalBody } from "../ModalBody/ModalBody";
@@ -28,10 +27,7 @@ export const ElementConfiguration = ({
   function setCurrentField(event) {
     const { name, value } = event.target;
     const dataCopy = { ...data };
-
     dataCopy[name] = value;
-
-    console.log(dataCopy, "*** checkc");
     setData(dataCopy);
   }
 
@@ -105,5 +101,3 @@ export const ElementConfiguration = ({
     </Modal>
   );
 };
-
-ElementConfiguration.propTypes = {};

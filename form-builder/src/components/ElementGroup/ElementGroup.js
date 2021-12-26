@@ -4,7 +4,6 @@ import { Search } from "react-bootstrap-icons";
 import { elements } from "../../constants/consts";
 import { ElementConfiguration } from "../ElementConfiguration";
 import { NavElementsList } from "../NavElementsList";
-import { NavTemplatesList } from "../NavTemplatesList";
 
 export const ElementGroup = () => {
   const [modal, setModal] = useState(null);
@@ -31,6 +30,7 @@ export const ElementGroup = () => {
     }
   }
 
+  // DEBOUNCING added for searching the form element in search bar
   let timer = null;
   function debounceWrapper(event) {
     setLoading(true);
@@ -81,8 +81,6 @@ export const ElementGroup = () => {
           toggleModal={toggleModal}
           elements={renderedElements}
         />
-        {/* <p className="text-white">Templates</p>
-        <NavTemplatesList toggleModal={toggleModal} /> */}
       </div>
     </>
   );

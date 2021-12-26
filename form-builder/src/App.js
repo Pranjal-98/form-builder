@@ -1,7 +1,6 @@
 import React, { createContext } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Sidebar } from "./layout/Sidebar";
-import { FormDisplay } from "./screens/FormDisplay";
 import { FormGenerator } from "./screens/FormGenerator";
 import "./App.css";
 
@@ -40,7 +39,6 @@ function App() {
         <div style={{ height: "100vh", overflow: "scroll", width: "100%" }}>
           <Routes>
             <Route path="/" element={<FormGenerator />} />
-            <Route path="/display" element={<FormDisplay />} />
           </Routes>
         </div>
       </div>

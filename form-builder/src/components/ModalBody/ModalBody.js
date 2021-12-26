@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import PropTypes from "prop-types";
 import { spawnElemenConfig } from "../../spawner";
 
 export const ModalBody = ({
@@ -28,5 +27,3 @@ export const ModalBody = ({
     </Form>
   );
 };
-
-ModalBody.propTypes = {};

@@ -12,6 +12,7 @@ export const ElementWrapperEditMode = ({
   provided,
   snapshot,
 }) => {
+  // Edit / Delete selected element
   return (
     <Row
       className={`d-flex justify-content-space-between w-100 py-4 px-2 elementWrapper ${
@@ -27,7 +28,7 @@ export const ElementWrapperEditMode = ({
       </Col>
       <Col xs={9}>{children}</Col>
       <Col xs={2} className="d-flex justify-content-around flex-column">
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mb-3">
           <Button
             variant="secondary"
             className="controlButton"
